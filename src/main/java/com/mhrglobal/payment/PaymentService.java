@@ -1,12 +1,7 @@
 package com.mhrglobal.payment;
 
-//Do not change
-public interface PaymentService {
+import com.mhrglobal.domain.Employee;
 
-    /**
-     * Enters the payment process
-     * @param amount The amount to take in pounds and pence
-     * @return True if successful
-     */
-    boolean requestPayment(float amount);
+public interface PaymentService {
+    boolean requestPayment(Employee employee);
 }
