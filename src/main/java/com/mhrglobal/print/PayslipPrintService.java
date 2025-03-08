@@ -1,21 +1,35 @@
 package com.mhrglobal.print;
 
-import com.mhrglobal.clients.PrinterClient;
+import com.mhrglobal.domain.EmployeeRole;
+import com.mhrglobal.domain.Payslip;
+import com.mhrglobal.employee.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.UUID;
+
 public class PayslipPrintService implements PrintService {
 
-    private final PrinterClient printerClient;
+    private static final PayslipPrintService instance = new PayslipPrintService();
     Logger logger = LoggerFactory.getLogger(PayslipPrintService.class);
+    private EmployeeService employeeService;
 
-    public PayslipPrintService(PrinterClient printerClient) {
-        this.printerClient = printerClient;
+    private PayslipPrintService() {
+    }
+
+    public static PrintService getInstance(EmployeeRole role) {
+        instance.setEmployeeService(role);
+        return instance;
     }
 
     @Override
-    public void requestPrinting(String role, String basePay, String overtime, String total) {
-        this.printerClient.print(String.format("Role: %s, BasePay: £ %s, Overtime: £ %s, Total: £ %s\n", role, basePay, overtime, total));
-        logger.info("Print called, Role: {}, BasePay: £{}, Overtime: £{}, Total: £{}", role, basePay, overtime, total);
+    public Payslip requestPrinting(UUID employeeId) {
+        Payslip payslip = employeeService.createPayslip(employeeId);
+        logger.info("Print called, Role: {}, BasePay: £{}, Overtime: £{}, Total: £{}", payslip.getRole(), payslip.getBasePay(), payslip.getOvertime(), payslip.getTotal());
+        return payslip;
+    }
+
+    private void setEmployeeService(EmployeeRole role) {
+        this.employeeService = EmployeeService.getInstance(role);
     }
 }

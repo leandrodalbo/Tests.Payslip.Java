@@ -2,17 +2,26 @@ package com.mhrglobal.domain;
 
 import java.util.UUID;
 
-public abstract class Employee {
-    private static final int overtimeLimit = 60;
+public class Employee {
 
+    private final UUID employeeId;
+    private final EmployeeRole role;
     private final double baseSalary;
     private final int extraHours;
-    private final UUID employeeId = UUID.randomUUID();
 
-    public Employee(double baseSalary, int extraHours) {
+    public Employee(UUID employeeId, EmployeeRole role, double baseSalary, int extraHours) {
+        this.employeeId = employeeId;
+        this.role = role;
         this.baseSalary = baseSalary;
         this.extraHours = extraHours;
+    }
 
+    public UUID getEmployeeId() {
+        return employeeId;
+    }
+
+    public EmployeeRole getRole() {
+        return role;
     }
 
     public double getBaseSalary() {
@@ -20,17 +29,6 @@ public abstract class Employee {
     }
 
     public int getExtraHours() {
-        return Math.min(extraHours, overtimeLimit);
+        return extraHours;
     }
-
-    public UUID getEmployeeId() {
-        return employeeId;
-    }
-
-    public abstract String role();
-
-    public abstract double totalSalary();
-
-    public abstract double overtimePayed();
-
 }

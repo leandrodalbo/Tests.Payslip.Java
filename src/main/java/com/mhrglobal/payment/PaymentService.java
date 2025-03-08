@@ -1,7 +1,13 @@
 package com.mhrglobal.payment;
 
-import com.mhrglobal.domain.Employee;
+import com.mhrglobal.domain.EmployeeRole;
+
+import java.util.UUID;
 
 public interface PaymentService {
-    boolean requestPayment(Employee employee);
+    static PaymentService getInstance(EmployeeRole role) {
+        return BankPaymentService.getInstance(role);
+    }
+
+    boolean requestPayment(UUID employeeId);
 }
