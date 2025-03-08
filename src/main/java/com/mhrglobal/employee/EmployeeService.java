@@ -8,9 +8,9 @@ import java.util.UUID;
 public interface EmployeeService {
     static EmployeeService getInstance(EmployeeRole role) {
         return switch (role) {
-            case ENGINEER -> EngineerService.getInstance(role);
-            case MANAGER -> ManagerService.getInstance(role);
-            case DIRECTOR -> DirectorService.getInstance(role);
+            case ENGINEER -> EngineerService.getInstance();
+            case MANAGER -> ManagerService.getInstance();
+            case DIRECTOR -> DirectorService.getInstance();
         };
     }
 

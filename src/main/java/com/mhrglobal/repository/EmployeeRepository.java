@@ -5,14 +5,26 @@ import com.mhrglobal.domain.EmployeeRole;
 
 import java.util.UUID;
 
-public interface EmployeeRepository {
-    static EmployeeRepository getInstance(EmployeeRole role) {
-        return switch (role) {
-            case ENGINEER -> EngineerRepository.getInstance();
-            case MANAGER -> ManagerRepository.getInstance();
-            case DIRECTOR -> DirectorRepository.getInstance();
-        };
+public class EmployeeRepository {
+    private static final EmployeeRepository instance = new EmployeeRepository();
+
+    private EmployeeRepository() {
     }
 
-    Employee findById(UUID employeeId);
+    public static EmployeeRepository getInstance() {
+        return instance;
+    }
+
+    public Employee findDirectorById(UUID employeeId) {
+        return new Employee(UUID.randomUUID(), EmployeeRole.DIRECTOR, 540.5, 0);
+    }
+
+    public Employee findEngineerById(UUID employeeId) {
+        return new Employee(employeeId, EmployeeRole.ENGINEER, 100, 10);
+    }
+
+    public Employee findManagerById(UUID employeeId) {
+        return new Employee(employeeId, EmployeeRole.MANAGER, 440.5, 4);
+    }
+
 }

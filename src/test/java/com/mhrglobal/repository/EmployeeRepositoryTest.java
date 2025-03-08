@@ -12,27 +12,27 @@ public class EmployeeRepositoryTest {
 
     @Test
     void shouldFindADirectorByUUID() {
-        EmployeeRepository repository = EmployeeRepository.getInstance(EmployeeRole.DIRECTOR);
+        EmployeeRepository repository = EmployeeRepository.getInstance();
 
-        Employee employee = repository.findById(UUID.randomUUID());
+        Employee employee = repository.findDirectorById(UUID.randomUUID());
 
         assertThat(employee.getRole()).isEqualTo(EmployeeRole.DIRECTOR);
     }
 
     @Test
     void shouldFindAManagerByUUID() {
-        EmployeeRepository repository = EmployeeRepository.getInstance(EmployeeRole.MANAGER);
+        EmployeeRepository repository = EmployeeRepository.getInstance();
 
-        Employee employee = repository.findById(UUID.randomUUID());
+        Employee employee = repository.findManagerById(UUID.randomUUID());
 
         assertThat(employee.getRole()).isEqualTo(EmployeeRole.MANAGER);
     }
 
     @Test
     void shouldFindAnEngineerByUUID() {
-        EmployeeRepository repository = EmployeeRepository.getInstance(EmployeeRole.ENGINEER);
+        EmployeeRepository repository = EmployeeRepository.getInstance();
 
-        Employee employee = repository.findById(UUID.randomUUID());
+        Employee employee = repository.findEngineerById(UUID.randomUUID());
 
         assertThat(employee.getRole()).isEqualTo(EmployeeRole.ENGINEER);
     }

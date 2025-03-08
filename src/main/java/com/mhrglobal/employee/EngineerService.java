@@ -1,7 +1,6 @@
 package com.mhrglobal.employee;
 
 import com.mhrglobal.domain.Employee;
-import com.mhrglobal.domain.EmployeeRole;
 import com.mhrglobal.domain.HourRate;
 import com.mhrglobal.domain.PremiumOvertime;
 import com.mhrglobal.domain.Payslip;
@@ -12,32 +11,31 @@ import java.util.UUID;
 public class EngineerService implements EmployeeService {
     private static final EngineerService instance = new EngineerService();
     public final int engineerOvertimeLimit = 60;
-    private EmployeeRepository repository;
+    private final EmployeeRepository repository = EmployeeRepository.getInstance();
 
     private EngineerService() {
     }
 
-    public static EngineerService getInstance(EmployeeRole role) {
-        instance.setRepository(role);
+    public static EngineerService getInstance() {
         return instance;
     }
 
     @Override
     public double totalSalary(UUID employeeId) {
-        Employee employee = repository.findById(employeeId);
+        Employee employee = repository.findEngineerById(employeeId);
         return employee.getBaseSalary() + overtimePayed(employee);
     }
 
     @Override
     public double overtimePayed(UUID employeeId) {
-        Employee employee = repository.findById(employeeId);
+        Employee employee = repository.findEngineerById(employeeId);
         double totalForHours = HourRate.ENGINEER.getValue() * extraHours(employee.getExtraHours());
         return totalForHours + (totalForHours * PremiumOvertime.ENGINEER.getValue());
     }
 
     @Override
     public Payslip createPayslip(UUID employeeId) {
-        Employee employee = repository.findById(employeeId);
+        Employee employee = repository.findEngineerById(employeeId);
         return new Payslip(employee.getRole(), String.valueOf(employee.getBaseSalary()), String.valueOf(overtimePayed(employee)), String.valueOf(this.totalSalary(employee)));
     }
 
@@ -55,7 +53,4 @@ public class EngineerService implements EmployeeService {
         return Math.min(hours, engineerOvertimeLimit);
     }
 
-    private void setRepository(EmployeeRole role) {
-        this.repository = EmployeeRepository.getInstance(role);
-    }
 }
