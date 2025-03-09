@@ -6,9 +6,5 @@ import com.mhrglobal.domain.Payslip;
 import java.util.UUID;
 
 public interface PrintService {
-    static PrintService getInstance(EmployeeRole role) {
-        return PayslipPrintService.getInstance(role);
-    }
-
-    Payslip requestPrinting(UUID employeeId);
+    void requestPrinting(EmployeeRole role, UUID employeeId);
 }

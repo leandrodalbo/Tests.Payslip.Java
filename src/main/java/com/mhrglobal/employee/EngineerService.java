@@ -9,16 +9,14 @@ import com.mhrglobal.repository.EmployeeRepository;
 import java.util.UUID;
 
 public class EngineerService implements EmployeeService {
-    private static final EngineerService instance = new EngineerService();
     public final int engineerOvertimeLimit = 60;
-    private final EmployeeRepository repository = EmployeeRepository.getInstance();
 
-    private EngineerService() {
+    private final EmployeeRepository repository;
+
+    public EngineerService(EmployeeRepository repository) {
+        this.repository = repository;
     }
 
-    public static EngineerService getInstance() {
-        return instance;
-    }
 
     @Override
     public double totalSalary(UUID employeeId) {

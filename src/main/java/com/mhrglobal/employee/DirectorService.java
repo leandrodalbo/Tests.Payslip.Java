@@ -7,15 +7,13 @@ import com.mhrglobal.repository.EmployeeRepository;
 import java.util.UUID;
 
 public class DirectorService implements EmployeeService {
-    private static final DirectorService instance = new DirectorService();
-    private final EmployeeRepository repository = EmployeeRepository.getInstance();
 
-    private DirectorService() {
+    private final EmployeeRepository repository;
+
+    public DirectorService(EmployeeRepository repository) {
+        this.repository = repository;
     }
 
-    public static DirectorService getInstance() {
-        return instance;
-    }
 
     @Override
     public double totalSalary(UUID employeeId) {

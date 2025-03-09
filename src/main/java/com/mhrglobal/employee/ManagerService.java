@@ -9,16 +9,13 @@ import com.mhrglobal.repository.EmployeeRepository;
 import java.util.UUID;
 
 public class ManagerService implements EmployeeService {
-    private static final ManagerService instance = new ManagerService();
     public final int managerOvertimeLimit = 60;
-    private final EmployeeRepository repository = EmployeeRepository.getInstance();
+    private final EmployeeRepository repository;
 
-    private ManagerService() {
+    public ManagerService(EmployeeRepository repository) {
+        this.repository = repository;
     }
 
-    public static ManagerService getInstance() {
-        return instance;
-    }
 
     @Override
     public double totalSalary(UUID employeeId) {

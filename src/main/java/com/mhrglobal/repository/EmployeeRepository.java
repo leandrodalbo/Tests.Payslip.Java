@@ -6,14 +6,6 @@ import com.mhrglobal.domain.EmployeeRole;
 import java.util.UUID;
 
 public class EmployeeRepository {
-    private static final EmployeeRepository instance = new EmployeeRepository();
-
-    private EmployeeRepository() {
-    }
-
-    public static EmployeeRepository getInstance() {
-        return instance;
-    }
 
     public Employee findDirectorById(UUID employeeId) {
         return new Employee(UUID.randomUUID(), EmployeeRole.DIRECTOR, 540.5, 0);

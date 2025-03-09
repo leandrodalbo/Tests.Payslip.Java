@@ -3,7 +3,8 @@ package com.mhrglobal.domain;
 public enum EmployeeRole {
     ENGINEER("ENGINEER"),
     MANAGER("MANAGER"),
-    DIRECTOR("DIRECTOR");
+    DIRECTOR("DIRECTOR"),
+    NONE("NONE");
 
     private final String value;
 

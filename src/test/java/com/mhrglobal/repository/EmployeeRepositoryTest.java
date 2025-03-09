@@ -9,11 +9,10 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class EmployeeRepositoryTest {
+    EmployeeRepository repository = new EmployeeRepository();
 
     @Test
     void shouldFindADirectorByUUID() {
-        EmployeeRepository repository = EmployeeRepository.getInstance();
-
         Employee employee = repository.findDirectorById(UUID.randomUUID());
 
         assertThat(employee.getRole()).isEqualTo(EmployeeRole.DIRECTOR);
@@ -21,8 +20,6 @@ public class EmployeeRepositoryTest {
 
     @Test
     void shouldFindAManagerByUUID() {
-        EmployeeRepository repository = EmployeeRepository.getInstance();
-
         Employee employee = repository.findManagerById(UUID.randomUUID());
 
         assertThat(employee.getRole()).isEqualTo(EmployeeRole.MANAGER);
@@ -30,8 +27,6 @@ public class EmployeeRepositoryTest {
 
     @Test
     void shouldFindAnEngineerByUUID() {
-        EmployeeRepository repository = EmployeeRepository.getInstance();
-
         Employee employee = repository.findEngineerById(UUID.randomUUID());
 
         assertThat(employee.getRole()).isEqualTo(EmployeeRole.ENGINEER);
