@@ -1,13 +1,10 @@
 package com.mhrglobal;
 
-import com.mhrglobal.domain.Employee;
 import com.mhrglobal.domain.EmployeeRole;
 import com.mhrglobal.payment.PaymentService;
 import com.mhrglobal.print.PrintService;
-import com.mhrglobal.repository.EmployeeRepository;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 public class PayService {
