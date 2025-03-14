@@ -1,14 +1,10 @@
 package com.mhrglobal.print;
 
-//Do not change
-public interface PrintService {
+import com.mhrglobal.domain.EmployeeRole;
+import com.mhrglobal.domain.Payslip;
 
-    /**
-     * Enters the payment process
-     *
-     * @param BasePay  Employee base pay
-     * @param Overtime additional overtime worked
-     * @param Total    Total amount to be paid
-     */
-    void requestPrinting(String role, String BasePay, String Overtime, String Total);
+import java.util.UUID;
+
+public interface PrintService {
+    void requestPrinting(EmployeeRole role, UUID employeeId);
 }

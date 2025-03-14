@@ -21,3 +21,15 @@ An engineer on a 20-hour contract working 30 hours would make:
    £100 base
    £50 x 35% overtime £67.50
    Total: £167.50
+
+# Installing dependencies
+
+```bash
+mvn clean install
+```
+
+# Executing unit-tests
+
+```bash
+mvn clean test
+```

@@ -1,14 +1,31 @@
 package com.mhrglobal;
 
-import com.mhrglobal.payment.BankPaymentService;
+import com.mhrglobal.domain.EmployeeRole;
 import com.mhrglobal.payment.PaymentService;
-import com.mhrglobal.print.PayslipPrintService;
 import com.mhrglobal.print.PrintService;
 
-//Implement a Pay Service that makes use of the payment and printing services
+import java.util.Map;
+import java.util.UUID;
+
 public class PayService {
 
-    PaymentService bankPaymentService = new BankPaymentService();
-    PrintService paperPrintService = new PayslipPrintService();
+    private static final PaymentService paymentService = ApplicationContext.paymentService;
+    private static final PrintService printService = ApplicationContext.printService;
+
+    public static void main(String[] args) {
+
+        Map<UUID, EmployeeRole> employees = Map.of(UUID.randomUUID(), EmployeeRole.MANAGER,
+                UUID.randomUUID(), EmployeeRole.ENGINEER,
+                UUID.randomUUID(), EmployeeRole.MANAGER,
+                UUID.randomUUID(), EmployeeRole.ENGINEER,
+                UUID.randomUUID(), EmployeeRole.DIRECTOR);
+
+        employees.entrySet().forEach(it -> {
+            paymentService.requestPayment(it.getValue(), it.getKey());
+            printService.requestPrinting(it.getValue(), it.getKey());
+        });
+
+    }
+
 
 }
